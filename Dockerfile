@@ -1,12 +1,16 @@
 FROM python:3.8
 
-RUN groupadd -r uwsgi && useradd -r -g uwsgi uwsgi
-RUN pip install Flask==0.10.1 uWSGI==2.0.8 requests==2.5.1 redis==2.10.3
 WORKDIR /app
+RUN groupadd -r uwsgi && useradd -r -g uwsgi uwsgi
+
 COPY app /app
+COPY requirements.txt /app/requirements.txt
 COPY cmd.sh /
 
-EXPOSE 9090 9191
+RUN pip install -r /app/requirements.txt
+RUN chmod +x /cmd.sh
+
+EXPOSE 9090 9191 5000
 USER uwsgi
 
 CMD ["/cmd.sh"]
