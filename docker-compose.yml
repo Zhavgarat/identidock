@@ -1,10 +1,10 @@
 identidock:
   build: .
   ports:
-   - "9090:9090"
-   - "9191:9191"
+    - "9090:9090"
+    - "9191:9191"
   environment:
-    ENV: DEV 
+    ENV: PROD
   volumes:
     - ./app:/app
   links:
